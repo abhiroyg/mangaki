@@ -8,6 +8,7 @@ import csv
 import os.path
 
 from mangaki.utils.data import Dataset
+from mangaki.utils.balse import MangakiBALSE
 from mangaki.utils.wals import MangakiWALS
 from mangaki.utils.als import MangakiALS
 from mangaki.utils.knn import MangakiKNN
@@ -34,19 +35,20 @@ logger = logging.getLogger(__name__)
 class Experiment(object):
     def __init__(self, dataset_name):
         self.algos = [
-            lambda: MangakiALS(10),
-            lambda: MangakiALS(20),
-            lambda: MangakiALS(30),
-            lambda: MangakiALS(40),
-            lambda: MangakiWALS(20),
-            lambda: MangakiSVD(10),
-            lambda: MangakiSVD(20),
-            lambda: MangakiSVD(30),
-            lambda: MangakiSVD(40),
-            lambda: MangakiSVD(50),
-            lambda: MangakiPCA(20),
-            lambda: MangakiKNN(20),
-            lambda: MangakiKNN(40),
+            # lambda: MangakiALS(10),
+            # lambda: MangakiALS(20),
+            # lambda: MangakiALS(30),
+            # lambda: MangakiALS(40),
+            # lambda: MangakiWALS(20),
+            # lambda: MangakiSVD(10),
+            # lambda: MangakiSVD(20),
+            # lambda: MangakiSVD(30),
+            # lambda: MangakiSVD(40),
+            # lambda: MangakiSVD(50),
+            # lambda: MangakiPCA(20),
+            # lambda: MangakiKNN(20),
+            # lambda: MangakiKNN(40),
+            # lambda: MangakiBALSE(10),
             lambda: MangakiZero()
         ]
         self.anonymized = None
@@ -74,8 +76,9 @@ class Experiment(object):
                 if model.verbose:
                     logger.debug('Predicted: %s' % y_pred[:5])
                     logger.debug('Was: %s' % self.anonymized.y[i_test][:5])
-                logger.debug('RMSE %f' % rmse)
+                logger.info('RMSE %f' % rmse)
                 rmse_values[model.get_shortname()].append(rmse)
+            break  # One instance is enough
         logger.info('Final results')
         for algo_name in rmse_values:
             logger.info('%s: RMSE = %f' % (algo_name, np.mean(rmse_values[algo_name])))

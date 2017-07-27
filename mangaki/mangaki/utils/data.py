@@ -71,7 +71,7 @@ class Dataset:
         triplets = np.array(triplets, dtype=np.object)
         self.anonymized = AnonymizedData(
             X=triplets[:, 0:2],
-            y=triplets[:, 2],
+            y=np.array(triplets[:, 2], dtype=np.float32),
             nb_users=max(triplets[:, 0]) + 1, 
             nb_works=max(triplets[:, 1]) + 1
         )

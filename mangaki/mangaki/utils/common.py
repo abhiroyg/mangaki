@@ -1,6 +1,7 @@
 from django.conf import settings
 from mangaki.utils.chrono import Chrono
 from sklearn.metrics import mean_squared_error
+
 import pickle
 import os.path
 

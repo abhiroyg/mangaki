@@ -144,25 +144,26 @@ LOGGING = {
     'disable_existing_loggers': False,
     'root': {
         'level': 'INFO',
-        'handlers': ['console'],
+        'handlers': ['console']
     },
     'handlers': {
         'console': {
             'level': 'INFO',
-            'class': 'logging.StreamHandler',
+            'class': 'logging.StreamHandler'
         },
     },
     'loggers': {
         'mangaki': {
             'handlers': ['console'],
-            'level': 'DEBUG'
+            'level': 'DEBUG',
+            'propagate': False
         },
         'django.db.backends': {
             'level': 'ERROR',
             'handlers': ['console'],
-            'propagate': False,
+            'propagate': False
         },
-    },
+    }
 }
 
 if config.has_section('sentry'):
