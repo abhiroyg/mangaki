@@ -22,7 +22,8 @@ import logging
 NB_SPLIT = 5  # Divide the dataset into 5 buckets
 FILENAMES = {
     'movies': 'ratings-ml.csv',
-    'mangas': 'ratings.csv'
+    'mangas': 'ratings.csv',
+    'balse': 'balse/ratings.csv'
 }
 CONVERT_FUNCTIONS = {
     'movies': float,
@@ -48,7 +49,7 @@ class Experiment(object):
             # lambda: MangakiPCA(20),
             # lambda: MangakiKNN(20),
             # lambda: MangakiKNN(40),
-            # lambda: MangakiBALSE(10),
+            lambda: MangakiBALSE(10),
             lambda: MangakiZero()
         ]
         self.anonymized = None
