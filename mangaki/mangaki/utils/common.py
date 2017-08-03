@@ -48,5 +48,12 @@ class RecommendationAlgorithm:
     def compute_rmse(self, y_pred, y_true):
         return mean_squared_error(y_true, y_pred) ** 0.5
 
+    def all_errors(self, X_train, X_test, y_train, y_test):
+        self.fit(X_train, y_train)
+        y_pred_train = self.predict(X_train)
+        print('Train error', self.compute_rmse(y_pred_train, y_train))
+        y_pred_test = self.predict(X_test)
+        print('Test error', self.compute_rmse(y_pred_test, y_test))
+
     def __str__(self):
         return '[%s]' % self.get_shortname().upper()
